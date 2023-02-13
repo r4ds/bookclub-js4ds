@@ -17,3 +17,7 @@
 .book.font-size-4 .book-body .page-inner section {
   font-size: 3.5em !important;
 }
+
+[id^="slide"] h2.hasAnchor {
+  margin: 0 !important;
+}
