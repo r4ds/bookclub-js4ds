@@ -1,4 +1,6 @@
 bookdown::gitbook:
+  includes:
+    in_header: "https://raw.githubusercontent.com/lucio-cornejo/embed-javascript-output/main/src/embed-js-outputs.html"
   css: style.css
   split_by: section
   config:
