@@ -6,6 +6,11 @@
 
 ## SLIDE 1 {-}
 
+```{js}
+const arr = [...Array(3).keys()];
+arr.map(el => el**2);
+```
+
 - ADD SLIDES AS SECTIONS (`##`).
 - TRY TO KEEP THEM RELATIVELY SLIDE-LIKE; THESE ARE NOTES, NOT THE BOOK ITSELF.
 
