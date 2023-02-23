@@ -54,4 +54,5 @@ follow these alternative steps:
     1. After saving your finished chapter notes, **add**, **commit** and **push**
     your changes into your forked repo.
     1. Finally, create a **pull request** in order to update the online version of the book.
+    1. Pay attention to the messages on GitHub. For example, if your branch is out of date, please merge the main branch and resolve any conflicts (see the [full instructions](https://github.com/r4ds/bookclub-js4ds#how-to-present) for easy ways to deal with things in R).
 
