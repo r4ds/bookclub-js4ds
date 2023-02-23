@@ -9,7 +9,8 @@
   font-size: 2em !important;
 }
 .book.font-size-2 .book-body .page-inner section {
-  font-size: 2.5em !important;
+  /* font-size: 2.5em !important; */
+  font-size: 1.5em !important;
 }
 .book.font-size-3 .book-body .page-inner section {
   font-size: 3em !important;
@@ -18,6 +19,6 @@
   font-size: 3.5em !important;
 }
 
-[id^="slide"] h2.hasAnchor {
+.page-inner h2.hasAnchor {
   margin: 0 !important;
 }
