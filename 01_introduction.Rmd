@@ -2,12 +2,121 @@
 
 **Learning objectives:**
 
-- THESE ARE NICE TO HAVE BUT NOT ABSOLUTELY NECESSARY
+- Download **Node.js** and **npm**.
+- Get familiar with **Visual Studio Code** and **Quokka.js**.
 
-## SLIDE 1 {-}
+## The Shape of Things to Come {-}
 
-- ADD SLIDES AS SECTIONS (`##`).
-- TRY TO KEEP THEM RELATIVELY SLIDE-LIKE; THESE ARE NOTES, NOT THE BOOK ITSELF.
+- In this book, we'll cover the following topics:
+    - Core features of modern JavaScript.
+    - Programming with **callbacks** and **promises**.
+    - Creating objects and **classes**.
+    - Writing **HTML** and **CSS**.
+    - Creating interactive pages with **React**.
+    - Building data services.
+    - Testing.
+    - **Data Visualization**.
+    - Combining everything to create a 
+    [three-tier](https://www.techopedia.com/definition/24649/three-tier-architecture)
+    web application.
+
+- We'll cover an even mix of **browser** programming
+and **server** programming.
+
+## Who You Are {-}
+
+- The prototypical users of this book:
+    - Can write programs that use lists, loops, conditionals and functions.
+    - Can run basic commands in a **command-line interface** (CLI), such as
+    change, create or delete a directory.
+    - Have reliable access to the internet.
+
+## Who We Are {-}
+
+- [Maya Gans](https://maya.rbind.io/)
+    - Made these book clubs [happen](https://www.rstudio.com/resources/rstudioglobal-2021/starting-an-r-book-club-cooking-up-friendships-in-isolation/) in early 2020.
+    - Co-creator of the [Mastering Shiny Solutions](https://mastering-shiny-solutions.org/) book.
+
+- [Toby Hodges](https://tbyhdgs.info/)
+    - Also co-wrote a book called [Introduction to Regular Expressions](https://tobyhodges.gitbooks.io/introduction-to-regular-expressions/content/).
+
+- [Greg Wilson](https://third-bit.com/)
+    - One of the main contributors of [TidyBlocks](https://third-bit.com/2021/07/22/whatever-happened-to-tidyblocks/),
+    a block based tool for data analysis and visualization, originally created by 
+    [Maya Gans](https://twitter.com/mayacelium/status/1154794578102247425).
+
+## Setting Up {-}
+
+- [Repository](https://github.com/software-tools-books/js4ds/tree/master/src) 
+with the code examples of the book, organized by chapters.
+
+- The **exercises** are **not optional** ... they include new information
+necessary later in the book.
+
+- [Download](https://nodejs.org/en/download/) the 
+the latest Long-term Support (LTS) versions of **Node** and **npm**.
+
+- **Node** will allows us to execute JavaScript code:
+    - Via a **REPL**: `node` 
+    - Execute a JavaScript file: `node fileName.js`
+
+- **npm** is the **Node Package manager**, a 
+command line tool for *finding*, *installing*,
+*updating*, *building* and *executing* JavaScript libraries.
+
+- These are some common **npm** commands:
+    - [**Locally**](https://github.com/npm/npm/issues/5108) 
+    install a library (just for the current project folder):
+    `npm install libraryName`
+    - **Globally** install a library, so that all projects can use it:
+    `npm install -g libraryName`
+    - Show locally installed libraries:
+    `npm list`
+    - Show gloablly installed libraries:
+    `npm list -g`
+    
+## Setting Up (Extra) {-}
+
+- In this book, we'll be working with
+files with extension `.html`, `.css` and `.js`.
+
+- The **RStudio** IDE has support for such types
+of files ... it's good, but not great.
+
+- Therefore, an IDE more suitable for **web development**
+may be used, such as [Visual Studio Code](https://code.visualstudio.com/download).
+
+- In particular, the **VS Code** extension called
+[Quokka.js](https://marketplace.visualstudio.com/items?itemName=WallabyJs.quokka-vscode)
+is very useful for the types of exercises that we'll cover in this book.
+
+## Contributing {-}
+
+- Contributions of all kinds are welcome:
+    - Errata
+    - Minor improvements
+    - New sections or chapters
+
+- To contrinute, submit a pull request to this
+GitHub [repository](https://github.com/software-tools-books/js4ds/).
+
+## Exercises {-}
+
+```bash
+node --version
+# Output: v18.14.2
+```
+
+```bash
+npm --version
+# Output: 9.5.0
+```
+
+```{js, eval=FALSE}
+// Modify and press Alt+J
+s = "Hello, World";
+s;
+```
 
 ## Meeting Videos {-}
 
