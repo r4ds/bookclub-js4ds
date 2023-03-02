@@ -250,6 +250,433 @@ instead of having only one big JavaScript file.
 
 - JavaScript has several module systems.
     - Node.js uses **CommonJS**.
+    - All modern browsers support the current standard,
+    called <span title="JavaScript's official name is ECMAScript">**ES6**</span>.
+
+- Module-defined variables are **scoped to the module**, unless explicitly attached to the global object. 
+- On the other hand, globally-defined variables are available within the module.
+
+- Let's define a module using Node.js.
+
+## Extra
+
+- Useful links with respect to the *semi*-optional use of **semi-colons**:
+    - <https://www.freecodecamp.org/news/lets-talk-about-semicolons-in-javascript-f1fe08ab4e53/>
+    - <https://dev.to/adriennemiller/semicolons-in-javascript-to-use-or-not-to-use-2nli>
+
+## Exercises
+
+## *Typeof* {-}
+
+`typeof` is a JavaScript [operator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_Operators).
+
+## *Fill in the Blanks* {-}
+
+1. [Array.push](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push)
+adds one or more element(s) to the end of an array, and, returns the length of the new array.
+
+```{js, eval=F}
+const arr = [0];
+console.log(arr.push(1));
+console.log(arr);
+```
+
+1. The [while](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/while)
+statement creates a loop that gets executed as long as the test condition is *truthy*.
+
+```{js, eval=F}
+let n = 0;
+
+while (n < 2) {
+  n = n+1;
+  console.log(`n is ${n-1}`);
+}
+```
+
+1. The [addition assignment](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Addition_assignment) (`+=`) is an operator that adds the value in the right hand side
+to a variable and assigngs the result to such variable.
+
+```{js, eval=F}
+let x = 1;
+x += 2;
+console.log(x);
+```
+
+1. The [Array.reverse()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reverse) method changes the value of the original array (even without a reassign operator),
+via changing direction to the elements order (first element becomes last; last one becomes first, etc).
+
+```{js, eval=F}
+const arr = [1, 2, 3];
+arr.reverse();
+console.log(arr);
+```
+
+## *What Is Truth?* {-}
+
+```{js, eval=F}
+function isTruthy(x) {
+  // Check it argument is an array
+  return Array.isArray(x)
+    // Return false for empty array
+    ? !!x.length
+    // Argument is not an array
+    : !!x;
+}
+```
+
+```{js, echo=F}
+window.isTruthy = function(x) {
+  // Check it argument is an array
+  return Array.isArray(x)
+    // Return false for empty array
+    ? !!x.length
+    // Argument is not an array
+    : !!x;
+}
+```
+
+```{js, eval=F}
+[ [], [1], 0, 1, "", "1", undefined, null ]
+  .forEach(item => console.log(`item: ${item} returns ${isTruthy(item)}`));
+```
+
+## The Shape of Things to Come {-}
+
+A possible advantage of return `[undefined, undefined]` when the
+input has *no length*, instead of returning `undefined` is that
+the first return message specifies the type of *error* encountered,
+that is, that **no comparison** can be done between elements,
+because there are none; while the `undefined` returned value
+is the **default** for JS functions without a `return` section,
+so, it may not be clear that an **error has occurred**.
+
+## Combining Different Types {-}
+
+- [NaN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/NaN#)
+represents a value that it's **Not A Number**.
+- When `NaN` is used for mathematical operations, the result
+is *always* `NaN`, except for this
+[counterexample](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/NaN#silently_escaping_nan).
+
+- That is why the code example provided in the book returns `NaN` for the
+the second `console.log` output.
+
+- A real world implication of `NaN` is the necessity for **data cleaning**
+tools such as [`isNaN()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/isNaN)
+and [`Number.isNaN()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/isNaN),
+for dealing with lost or corrupted numeric data.
+
+## What Does This Do? {-}
+
+```{js, eval=F}
+const genus = 'Callithrix';
+const species = 'Jacchus';
+const creature = {genus, species};
+console.log(creature);
+```
+
+The previous code is creating an object called 
+`creature`, whose **keys** are defined by the names 
+of the variables enclosed in `{}`, and whose **values**
+are defined by the value of their respective variable/key.
+
+## Destructuring Asssignment {-}
+
+```{js, eval=F}
+const creature = {
+  genus: 'Callithrix',
+  species: 'Jacchus'
+}
+const {genus, species} = creature
+
+console.log(`genus is ${genus}`)
+console.log(`species is ${species}`)
+```
+
+```{js, eval=F}
+const creature = {
+  first: 'Callithrix',
+  second: 'Jacchus'
+}
+const {genus, species} = creature
+
+console.log(`genus is ${genus}`)
+console.log(`species is ${species}`)
+```
+
+1. The difference is in the 
+[destructuring assignment](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment). In the first example, 
+the variables genus and species can be properly defined
+because their *name* matches **some existing key** in
+the object `creature`. However, in the second example,
+there is **no key** `genus` nor `species` in the 
+object `creature`.
+
+1. Destructuring assignment makes it possible to
+**unpack** values from arrays, or, properties and
+methods from objects, into distinct variables.
+
+## Return To Me, For My Heart Wants You Only {-}
+
+```{js, eval=F}
+const verbose_sum = (first, second) => {
+  console.log(`Going to add ${first} to ${second}`);
+  let total = first + second;
+  return total;
+  console.log(`Finished summing`);
+}
+
+var result = verbose_sum(3, 6);
+console.log(result);
+```
+
+The last `console.log` inside the `verbose_sum`
+function **never gets executed**, because it's placed
+after a `return` statement, in the *same scope*.
+
+=======
+
+```{js, eval=FALSE}
+// Execute inside a hello.js file
+console.log('hello, world');
+```
+
+- Run a program using `node program_name.js` .
+
+- [console](https://developer.mozilla.org/en-US/docs/Web/API/console) 
+is a built-in **module** that provides basic printing services,
+among other things.
+
+- **Dotted notation** (`x.y`) allows us to get part `y` of `x`.
+
+- Strings can be defined via `''` or `""`.
+
+- The use of semi-colons at the end of a 
+[statement](https://masteringjs.io/tutorials/fundamentals/expressions)
+is optional, although **not** for this book's JavaScript chunks.
+
+## Basic Data Types
+
+- JS has is no **integer** type ... all numbers are stored
+as floating-point values.
+- The `typeof` 
+[operator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_Operators)
+returns the type of some value, as a string.
+- [const](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/const) 
+is used for defining values that **can not** be reassigned.
+
+```{js, eval=FALSE}
+const anInteger = 123
+const aNumber = 123.45;
+const aString = 'some text'
+
+console.log(`the type of ${anInteger} is ${typeof anInteger}`);
+console.log(`the type of ${aNumber} is ${typeof aNumber}`);
+console.log(`the type of ${aString} is ${typeof aString}`);
+
+// Functions are also a type of data
+console.log(typeof console.log)
+```
+
+- Arrays can be iterated using `for` and `of` in this way:
+    ```{js, eval=FALSE}
+    const otherValues = [true, undefined, null];
+    for (let value of otherValues) {
+      console.log(`the type of ${value} is ${typeof value}`);
+    }
+    ```
+
+- [let](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let)
+is used to define reassignable **local** variables.
+
+- The `boolean` type can be either `true` of `false`.
+- `undefined` means *hasn't been given a value*.
+- `null` means *has a value, which is nothing*.
+
+## Control Flow
+
+- **Nested loops**
+    ```{js, eval=F}
+    const nested = [
+      ['northwest', 'northeast'],
+      ['southwest', 'southeast']
+    ];
+    for (let outer of nested) {
+      for (let inner of outer) {
+        console.log(inner)
+      }
+    }
+    ```
+
+- **Conditionals** (`if` and `else`)
+    ```{js, eval=F}
+    const values = [0, 1, '', 'text', undefined, null, [], [2, 3]];
+    for (let element of values) {
+      if (element) {
+        console.log(`${element} of type ${typeof element} is truthy`)
+      } else {
+        console.log(`${element} of type ${typeof element} is falsy`)
+      }
+    }
+    ```
+
+- As just seen, arrays are **heterogeneous** ...
+they can contain values of many different types.
+
+- The [strict equality](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Strict_equality)
+operator (`===`) is recommended instead of using `==` ... perhaps this convinces you:
+
+    ```{r, echo=F, out.width="50%", fig.align="center"}
+    #| fig.cap: "https://www.freecodecamp.org/news/explaining-the-best-javascript-meme-i-have-ever-seen/"
+    knitr::include_graphics("./media/images/js-equality.png")
+    ```
+
+## Formatting Strings
+
+- Values can be **interpolated** using a *back-quoted* string.
+- Any valid JavaScript 
+<span title="A snippet of code that evaluates to a value">***expression***</span> 
+can be inserted into `${...}`.
+
+- Example:
+    ```{js, eval=F}
+    for (let color of ['red', 'green', 'blue']) {
+    const message = `color is ${color}`
+      console.log(`${message} and capitalized is ${color.toUpperCase()}`)
+    }
+    ```
+
+## Objects
+
+- A JS object equivalent to a Python dictionary ...
+a **collection** of *key-value* pairs.
+- Use `{ }` to define an object.
+- The keys must be strings; the values, anything.
+
+```{js, eval=F}
+const person = {
+  "name": "Lucio",
+  'age': 26, 
+  country: "Peru"
+};
+
+console.table(person);
+```
+
+- Objects have `object` type.
+- Object values can be accessed via 
+`object_name[key_name]` or (if the key has a simple name)
+`object_name.key_name`.
+
+- Object can be represented in string form, to quickly
+inspect is key-value pairs:
+
+    ```{js, eval=F}
+    const person = {
+      "name": "Eren",
+      'age': 19, 
+      "hero": false
+    };
+    console.log(JSON.stringify(person));
+    ```
+
+## Functions
+
+- Functions are defined via `function`, followed by
+a *possible* name for it, and then a list of 
+*parameters*, which can be empty.
+
+- As an example, this function finds the lowest
+and highest values in an array:
+
+    ```{js, eval=F}
+    function limits (values) {
+      if (!values.length) {
+        return [undefined, undefined];
+      }
+      let low = values[0];
+      let high = values[0];
+      for (let v of values) {
+        if (v < low) low = v;
+        if (v > high) high = v;
+      }
+      return [low, high];
+    }
+    ```
+
+```{js, echo=F}
+window.limits = function (values) {
+  if (!values.length) {
+    return [undefined, undefined];
+  }
+  let low = values[0];
+  let high = values[0];
+  for (let v of values) {
+    if (v < low) low = v;
+    if (v > high) high = v;
+  }
+  return [low, high];
+}
+```
+
+- `return` can be used at any time, but, if it's
+not used, the function's result is `undefined`.
+
+- JavaScript being weird again:
+    
+    ```{js, eval=F}
+    const allTests = [
+      [],
+      [9],
+      [3, 30, 300],
+      ['apple', 'Grapefruit', 'banana'],
+      [3, 'apple', ['sub-array']]
+    ]
+    for (let test of allTests) {
+      console.log(`limits of ${test} are ${limits(test)}`);
+    }
+    ```
+
+- Funcions can also be defined via the **fat arrow syntax**:
+    ```{js, eval=F}
+    const limits = (values) => {
+      if (!values.length) {
+        return [undefined, undefined];
+      }
+      let low = values[0];
+      let high = values[0];
+      for (let v of values) {
+        if (v < low) low = v;
+        if (v > high) high = v;
+      }
+      return [low, high];
+    };
+
+    limits([1, 2, 3]);
+    ```
+
+- The functions defined in these two different
+ways can behave 
+[differently](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this):
+    
+    ```
+    // Open the JavaScript for Data Science online book,
+    // and execute this lines of code in the console.
+
+    document.querySelector("h1.title")
+      .addEventListener("click", function() { console.log(this) });
+
+    document.querySelector("h1.title")
+      .addEventListener("click", () => console.log(this));
+    ```
+
+## Modules
+
+- Modules are useful to organize code into multiple files,
+instead of having only one big JavaScript file.
+
+- JavaScript has several module systems.
+    - Node.js uses **CommonJS**.
     - All modern browsers suppont the current standard,
     called <span title="JavaScript's official name is ECMAScript">**ES6**</span>.
 
