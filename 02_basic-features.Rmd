@@ -264,6 +264,68 @@ instead of having only one big JavaScript file.
     - <https://www.freecodecamp.org/news/lets-talk-about-semicolons-in-javascript-f1fe08ab4e53/>
     - <https://dev.to/adriennemiller/semicolons-in-javascript-to-use-or-not-to-use-2nli>
 
+## Exercises
+
+## *Typeof* {-}
+
+`typeof` is a JavaScript [operator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_Operators).
+
+## *Fill in the Blanks* {-}
+
+1. [Array.push](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push)
+adds one or more element(s) to the end of an array, and, returns the length of the new array.
+
+```{js, eval=F}
+const arr = [0];
+console.log(arr.push(1));
+console.log(arr);
+```
+
+1. The [while](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/while)
+statement creates a loop that gets executed as long as the test condition is *truthy*.
+
+```{js, eval=F}
+let n = 0;
+
+while (n < 2) {
+  n = n+1;
+  console.log(`n is ${n-1}`);
+}
+```
+
+1. The [addition assignment](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Addition_assignment) (`+=`) is an operator that adds the value in the right hand side
+to a variable and assigngs the result to such variable.
+
+```{js, eval=F}
+let x = 1;
+x += 2;
+console.log(x);
+```
+
+1. The [Array.reverse()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reverse) method changes the value of the original array (even without a reassign operator),
+via changing direction to the elements order (first element becomes last; last one becomes first, etc).
+
+```{js, eval=F}
+const arr = [1, 2, 3];
+arr.reverse();
+console.log(arr);
+```
+
+## *What Is Truth?* {-}
+
+```{js, eval=F}
+function isTruthy(x) {
+  // Check it argument is an array
+  const isArray = Array.isArray(x);
+  // Return false for empty array
+  if (isArray) return !!x.length;
+
+  // Argument is not an array
+  return !!x;
+}
+```
+
+
 ## Meeting Videos {-}
 
 ### Cohort 1 {-}
