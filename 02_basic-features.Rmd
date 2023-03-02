@@ -250,7 +250,7 @@ instead of having only one big JavaScript file.
 
 - JavaScript has several module systems.
     - Node.js uses **CommonJS**.
-    - All modern browsers suppont the current standard,
+    - All modern browsers support the current standard,
     called <span title="JavaScript's official name is ECMAScript">**ES6**</span>.
 
 - Module-defined variables are **scoped to the module**, unless explicitly attached to the global object. 
