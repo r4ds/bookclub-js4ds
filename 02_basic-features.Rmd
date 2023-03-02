@@ -316,14 +316,123 @@ console.log(arr);
 ```{js, eval=F}
 function isTruthy(x) {
   // Check it argument is an array
-  const isArray = Array.isArray(x);
-  // Return false for empty array
-  if (isArray) return !!x.length;
-
-  // Argument is not an array
-  return !!x;
+  return Array.isArray(x)
+    // Return false for empty array
+    ? !!x.length
+    // Argument is not an array
+    : !!x;
 }
 ```
+
+```{js, echo=F}
+window.isTruthy = function(x) {
+  // Check it argument is an array
+  return Array.isArray(x)
+    // Return false for empty array
+    ? !!x.length
+    // Argument is not an array
+    : !!x;
+}
+```
+
+```{js, eval=F}
+[ [], [1], 0, 1, "", "1", undefined, null ]
+  .forEach(item => console.log(`item: ${item} returns ${isTruthy(item)}`));
+```
+
+## The Shape of Things to Come {-}
+
+A possible advantage of return `[undefined, undefined]` when the
+input has *no length*, instead of returning `undefined` is that
+the first return message specifies the type of *error* encountered,
+that is, that **no comparison** can be done between elements,
+because there are none; while the `undefined` returned value
+is the **default** for JS functions without a `return` section,
+so, it may not be clear that an **error has occurred**.
+
+## Combining Different Types {-}
+
+- [NaN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/NaN#)
+represents a value that it's **Not A Number**.
+- When `NaN` is used for mathematical operations, the result
+is *always* `NaN`, except for this
+[counterexample](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/NaN#silently_escaping_nan).
+
+- That is why the code example provided in the book returns `NaN` for the
+the second `console.log` output.
+
+- A real world implication of `NaN` is the necessity for **data cleaning**
+tools such as [`isNaN()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/isNaN)
+and [`Number.isNaN()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/isNaN),
+for dealing with lost or corrupted numeric data.
+
+## What Does This Do? {-}
+
+```{js, eval=F}
+const genus = 'Callithrix';
+const species = 'Jacchus';
+const creature = {genus, species};
+console.log(creature);
+```
+
+The previous code is creating an object called 
+`creature`, whose **keys** are defined by the names 
+of the variables enclosed in `{}`, and whose **values**
+are defined by the value of their respective variable/key.
+
+## Destructuring Asssignment {-}
+
+```{js, eval=F}
+const creature = {
+  genus: 'Callithrix',
+  species: 'Jacchus'
+}
+const {genus, species} = creature
+
+console.log(`genus is ${genus}`)
+console.log(`species is ${species}`)
+```
+
+```{js, eval=F}
+const creature = {
+  first: 'Callithrix',
+  second: 'Jacchus'
+}
+const {genus, species} = creature
+
+console.log(`genus is ${genus}`)
+console.log(`species is ${species}`)
+```
+
+1. The difference is in the 
+[destructuring assignment](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment). In the first example, 
+the variables genus and species can be properly defined
+because their *name* matches **some existing key** in
+the object `creature`. However, in the second example,
+there is **no key** `genus` nor `species` in the 
+object `creature`.
+
+1. Destructuring assignment makes it possible to
+**unpack** values from arrays, or, properties and
+methods from objects, into distinct variables.
+
+## Return To Me, For My Heart Wants You Only {-}
+
+```{js, eval=F}
+const verbose_sum = (first, second) => {
+  console.log(`Going to add ${first} to ${second}`);
+  let total = first + second;
+  return total;
+  console.log(`Finished summing`);
+}
+
+var result = verbose_sum(3, 6);
+console.log(result);
+```
+
+The last `console.log` inside the `verbose_sum`
+function **never gets executed**, because it's placed
+after a `return` statement, in the *same scope*.
 
 
 ## Meeting Videos {-}
