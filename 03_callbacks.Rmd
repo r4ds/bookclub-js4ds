@@ -1,13 +1,413 @@
 # Callbacks
 
-**Learning objectives:**
+**Learning objective:**
 
-- THESE ARE NICE TO HAVE BUT NOT ABSOLUTELY NECESSARY
+- Understand how callbacks work in JS
 
-## SLIDE 1 {-}
+## Recap on Functions
 
-- ADD SLIDES AS SECTIONS (`##`).
-- TRY TO KEEP THEM RELATIVELY SLIDE-LIKE; THESE ARE NOTES, NOT THE BOOK ITSELF.
+Most common ways to define functions
+
+- Function declaration
+- Function expression
+- Arrow function expression
+
+
+## Function declaration
+
+ - This is the most basic way to define a function in JavaScript. 
+ 
+ - It uses the function keyword, followed by the function name, the parameters in parentheses, and the 
+function body in curly braces.
+
+```{js, eval=FALSE}
+function add(x, y) {
+    return x + y;
+  }
+console.log(add(100, 200))
+```
+
+## Function expression
+
+- This is another way to define a function in JavaScript, which involves assigning a 
+function to a variable or a property of an object.
+
+```{js, eval=FALSE}
+const add = function(x, y) {
+    return x + y;
+  };
+
+console.log(add(100, 200))
+```
+
+## Arrow function expression
+
+- This is a shorthand syntax for defining functions in JavaScript, introduced in ES6. 
+
+- It uses the => symbol to separate the function parameters from the function body, 
+and can be used as an anonymous function or assigned to a variable. 
+
+- Method 1: 
+```{js, eval=FALSE}
+const add = (x, y) => {
+    return x + y;
+  };
+console.log(add(100, 200))
+```
+
+- Method 2: 
+
+```{js, eval=FALSE}
+const add = (x, y) => {return x + y};
+console.log(add(100, 200))
+```
+
+- Method 3: 
+
+```{js, eval=FALSE}
+const add = (x, y) => x + y;
+console.log(add(100, 200))
+```
+
+## Introduction to Callbacks
+
+- A callback function is a function A that is passed to another function B for B to 
+call at a later time. 
+
+- Callback functions are used to implement delayed actions, such as what to do when data arrives 
+in response to a network request.
+
+- Instead of a function giving us a result immediately, we give it another function 
+that tells it what to do next
+
+- So, what actually happens when functions are defined and called? 
+
+## Callstacks
+
+- In JavaScript, a call stack is a mechanism for tracking function calls in a program. 
+
+- It is a data structure that stores information about the functions that are currently 
+being executed in a program.
+
+- Whenever a function is called, it is added to the top of the call stack, and the 
+JavaScript engine starts executing the code inside that function. If the function 
+calls another function, the new function is added to the top of the call stack, 
+and its code is executed. This process continues until all the functions in the 
+call chain have been executed.
+
+- When a function finishes executing, it is removed from the top of the call stack, 
+and the JavaScript engine returns to the function that called it. The calling function 
+then continues executing from the point where it left off.
+
+## Functions of Functions
+
+- The call stack is important in JavaScript because it determines the order in which 
+functions are executed. 
+
+- It also plays a critical role in handling errors and debugging
+code. If an error occurs in a function, the call stack can help identify which 
+function caused the error and where in the code the error occurred. 
+This information can be used to debug the code and fix the problem.
+
+## Example 1
+
+```{js, eval=FALSE}
+function foo() {
+    console.log("Hello from foo!");
+    bar();
+  }
+  
+  function bar() {
+    console.log("Hello from bar!");
+  }
+  
+  foo();
+```
+
+In the example above, when the foo() function is called, it is added to the top of the 
+call stack. The JavaScript engine then starts executing the code inside foo(), which 
+logs "Hello from foo!" to the console and calls the bar() function. The bar() 
+function is then added to the top of the call stack, and its code is executed, 
+logging "Hello from bar!" to the console. Once bar() has finished executing, it is 
+removed from the call stack, and the JavaScript engine returns to foo() to finish 
+executing its code. Finally, when foo() has finished executing, it is removed from 
+the call stack and the program terminates.
+  
+## Example 2
+
+```{js, eval=FALSE}
+function foo() {
+    throw new Error("Something went wrong in foo!");
+  }
+  
+  function bar() {
+    foo();
+  }
+  
+  function baz() {
+    bar();
+  }
+  
+  baz();
+```
+
+In this example, when the baz() function is called, it is added to the top of the call stack.
+The JavaScript engine then starts executing the code inside baz(), which calls the bar()
+function. bar() is then added to the top of the call stack, and its code is executed, 
+which calls the foo() function. When foo() encounters an error and throws an exception,
+the JavaScript engine catches the exception and looks at the call stack to determine 
+where the error occurred. In this case, the call stack contains foo(), bar(), and baz(),
+in that order, so the JavaScript engine knows that the error occurred in foo(). 
+The error message "Something went wrong in foo!" is logged to the console, and the 
+program terminates.
+
+## Example 3
+
+- Combine a function that trims blanks off the starts and ends of strings and another 
+
+function that uses a regular expression to replace spaces with dots:
+
+- Simpler Method: 
+
+```{js, eval=FALSE}
+const trim = (text) => { return text.trim() }
+const dot = (text) => { return text.replace(/ /g, '.') }
+
+const pipeline = (text) => {
+
+    const trimmed  = trim(text)
+    const dotted = dot(trimmed)
+
+    return dotted
+  }
+
+  const original = '  this example uses text  '
+
+  const trimThenDot = pipeline(original)
+  console.log(trimThenDot)
+```
+
+- Book Method
+
+```{js, eval=FALSE}
+const trim = (text) => { return text.trim() }
+const dot = (text) => { return text.replace(/ /g, '.') }
+
+const original = '  this example uses text  '
+
+const pipeline = (initial, first, second) => {
+    return second(first(initial))
+  }
+
+const trimThenDot = pipeline(original, trim, dot)
+console.log(trimThenDot)
+```
+
+## Anonymous Functions
+
+- It is a function that does not have any name associated with it. 
+
+- Normally we use the `function` keyword before the function name to define a function in JavaScript, however, in anonymous functions in JavaScript, we use only the function keyword without the function name.
+
+- An anonymous function is not accessible after its initial creation, it can only be accessed by a 
+variable it is stored in as a function as a value. An anonymous function can also have multiple 
+arguments, but only one expression.
+
+
+## Example 1
+
+- In this example, we define an anonymous function that prints a message to the console. 
+
+- The function is then stored in the `greet` variable. We can call the function by invoking `greet()`.
+
+```{js, eval=FALSE}
+const greet = function () {
+	console.log("Welcome to the JS for DS bookclub!");
+};
+	
+greet();
+```
+
+## Example 2
+
+In this example, we pass arguments to the anonymous function.
+
+```{js, eval=FALSE}
+const greet = function (platform) {
+		console.log("Welcome to ", platform);
+};
+	
+greet("R4DS");
+
+```
+
+## Example 3
+
+- Another use case of anonymous functions is to invoke the function immediately after initialization, 
+this is also known as `Self Executing Function`. 
+
+- This can be done by adding parenthesis so we can immediately execute the anonymous function.
+
+```{js, eval=FALSE}
+(function () {
+	console.log("Welcome to the JS for DS bookclub!");
+})();
+
+```
+
+
+## Functional Programming
+
+- A style of programming in which data is transformed through successive application of functions, 
+rather than by using control structures such as loops. 
+
+- Functional programming in JavaScript relies heavily on callbacks and higher-order functions.
+
+- It is a paradigm of building computer programs using expressions and functions without mutating 
+state and data. 
+
+- It's aim is to write code that is clearer to understand and more bug resistant.
+
+- JavaScript arrays provide several methods to support functional programming. 
+
+## Array dot some (`array.some`)
+
+Returns true if any element in an array passes a test.
+
+```{js, eval=FALSE}
+const data = ['this', 'is', 'a', 'test']
+resp = data.some((x) => { return x.length > 3 })
+console.log('some longer than 3:', resp)
+```
+
+## Array dot every (`array.every`)
+
+Returns true if all elements in an array pass a test.
+
+```{js, eval=FALSE}
+const data = ['this', 'is', 'a', 'test']
+resp = data.every((x) => { return x.length > 1 })
+console.log("all longer than 1:", resp)
+```
+
+## Array dot filter (`array.filter`)
+
+Creates a new array containing only values that pass a test.
+
+```{js, eval=FALSE}
+const data = ['this', 'is', 'a', 'test']
+resp = data.filter((x) => { return x.length > 3 })
+console.log('those longer than 3:', resp)
+
+```
+
+## Array dot map (`array.map`)
+
+Creates a new array by calling a function for each element of an existing array.
+
+```{js, eval=FALSE}
+const data = ['this', 'is', 'a', 'test']
+resp = data.map((x) => { return x.slice(0, 2) })
+console.log('shortened', resp)
+
+```
+
+## Array dot reduce (`array.reduce`)
+
+- Reduces an array to a single value using a combining function and a starting 
+value. 
+
+- The combining function must take two values, which are the current running total and the 
+next value from the array; if the array is empty, Array.reduce returns the starting value
+
+
+- Syntax (which also acts as Example 1)
+
+```{js, eval=FALSE}
+// array
+const numbers = [1, 2, 3, 4, 5];
+
+// callBack Function
+const summation = (total, number) => {
+    return total + number;
+  }
+  
+// intitial value
+init = 0
+
+// return value (sum)
+const sum = numbers.reduce(summation, init);
+
+console.log(sum);
+```
+
+**Parameters**
+
+`callbackFn`
+A function to execute for each element in the array. **Its return value becomes the value of the accumulator parameter on the next invocation of callbackFn**. For the last invocation, the return value becomes the return value of reduce().
+
+The function is called with the following arguments:
+
+- `accumulator`: The value resulting from the previous call to callbackFn. On first call, initialValue if specified, otherwise the value of array[0].
+
+- `currentValue`: The value of the current element. On first call, the value of array[0] if an initialValue was specified, otherwise the value of array[1].
+
+- `currentIndex`: The index position of currentValue in the array. On first call, 0 if initialValue was specified, otherwise 1.
+
+`array`: The array reduce() was called upon.
+
+`initialValue` (Optional)
+A value to which accumulator is initialized the first time the callback is called. If initialValue is specified, callbackFn starts executing with the first value in the array as currentValue. If initialValue is not specified, accumulator is initialized to the first value in the array, and callbackFn starts executing with the second value in the array as currentValue. In this case, if the array is empty (so that there's no first value to return as accumulator), an error is thrown.
+
+`Return value`
+The value that results from running the "reducer" callback function to completion over the entire array.
+
+## Example 2
+
+Let’s create an acronym
+
+```{js, eval=FALSE}
+//array
+const data = ['this', 'is', 'a', 'test']
+
+// callBack Function
+const concatFirst = (accumulator, nextValue) => {
+  return accumulator + nextValue[0]
+}
+
+// intitial value
+init = ''
+
+// return value (acronym)
+let acronym = data.reduce(concatFirst, init)
+
+// print the result
+console.log(acronym)
+```
+
+## Example 3
+
+```{js, eval=FALSE}
+// array
+const strings = ["Hello", " ", "world", "!"];
+
+// callBack Function
+conc_function = (total, string) => {
+  return total + string;
+}
+
+// intitial value
+init = ''
+
+// return value (concatenatedString)
+const concatenatedString = strings.reduce(conc_function, init);
+
+console.log(concatenatedString); 
+```
+
+
+## Closures
+
 
 ## Meeting Videos {-}
 
@@ -22,3 +422,4 @@
 LOG
 ```
 </details>
+
