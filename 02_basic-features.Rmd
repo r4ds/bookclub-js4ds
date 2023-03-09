@@ -8,6 +8,7 @@
 - Create a **module** using Node.js .
 
 ## Hello, World
+<<<<<<< HEAD
 
 ```{js, eval=FALSE}
 // Execute inside a hello.js file
