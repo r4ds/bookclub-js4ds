@@ -165,7 +165,7 @@ program terminates.
 
 - Combine a function that trims blanks off the starts and ends of strings and another 
 
-function that uses a regular expression (Appendix 24) to replace spaces with dots:
+function that uses a regular expression to replace spaces with dots:
 
 - Simpler Method: 
 
@@ -270,7 +270,7 @@ state and data.
 
 - JavaScript arrays provide several methods to support functional programming. 
 
-## Array dot some
+## Array dot some (`array.some`)
 
 Returns true if any element in an array passes a test.
 
@@ -280,17 +280,17 @@ resp = data.some((x) => { return x.length > 3 })
 console.log('some longer than 3:', resp)
 ```
 
-## Array dot every
+## Array dot every (`array.every`)
 
 Returns true if all elements in an array pass a test.
 
 ```{js, eval=FALSE}
 const data = ['this', 'is', 'a', 'test']
-resp = data.some((x) => { return x.length > 1 })
+resp = data.every((x) => { return x.length > 1 })
 console.log("all longer than 1:", resp)
 ```
 
-## Array dot filter
+## Array dot filter (`array.filter`)
 
 Creates a new array containing only values that pass a test.
 
@@ -301,7 +301,7 @@ console.log('those longer than 3:', resp)
 
 ```
 
-## Array dot map
+## Array dot map (`array.map`)
 
 Creates a new array by calling a function for each element of an existing array.
 
@@ -312,7 +312,7 @@ console.log('shortened', resp)
 
 ```
 
-## Array dot reduce
+## Array dot reduce (`array.reduce`)
 
 - Reduces an array to a single value using a combining function and a starting 
 value. 
@@ -350,9 +350,9 @@ The function is called with the following arguments:
 
 - `accumulator`: The value resulting from the previous call to callbackFn. On first call, initialValue if specified, otherwise the value of array[0].
 
--`currentValue`: The value of the current element. On first call, the value of array[0] if an initialValue was specified, otherwise the value of array[1].
+- `currentValue`: The value of the current element. On first call, the value of array[0] if an initialValue was specified, otherwise the value of array[1].
 
--`currentIndex`: The index position of currentValue in the array. On first call, 0 if initialValue was specified, otherwise 1.
+- `currentIndex`: The index position of currentValue in the array. On first call, 0 if initialValue was specified, otherwise 1.
 
 `array`: The array reduce() was called upon.
 
@@ -364,6 +364,7 @@ The value that results from running the "reducer" callback function to completio
 
 ## Example 2
 
+Let’s create an acronym
 
 ```{js, eval=FALSE}
 //array
