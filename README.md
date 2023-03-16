@@ -11,7 +11,7 @@ As we read, we are producing [notes about the book](https://r4ds.io/js4ds).
 
 If you would like to present, please see the sign-up sheet for your cohort (linked below, and pinned in the [#book_club-js4ds](https://rfordatascience.slack.com/archives/C04KVRXB1JR) channel on Slack)!
 
-- [Cohort 1](https://docs.google.com/spreadsheets/d/1oG5VpHfI5aCQradQywi3Ma0Us4XSsaGhu2SHauBkIPw/edit?usp=sharing) (started 2023-02-23, facilitated by @Lucio Cornejo): [Thursdays, NA CST/CDT](https://www.timeanddate.com/worldclock/converter.html?iso=20230223T150000&p1=24&p2=1440) | [meeting videos](https://youtube.com/playlist?list=PL3x6DOfs2NGgwAfePIgOi6RqLABm2Rjkk)
+- [Cohort 1](https://docs.google.com/spreadsheets/d/1oG5VpHfI5aCQradQywi3Ma0Us4XSsaGhu2SHauBkIPw/edit?usp=sharing) (started 2023-02-23, facilitated by @Lucio Cornejo): [Thursdays, 9:00AM CDT](https://www.timeanddate.com/worldclock/converter.html?iso=20230330T140000&p1=24&p2=1440) | [meeting videos](https://youtube.com/playlist?list=PL3x6DOfs2NGgwAfePIgOi6RqLABm2Rjkk)
 
 <hr>
 
