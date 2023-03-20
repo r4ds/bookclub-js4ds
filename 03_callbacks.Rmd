@@ -405,9 +405,62 @@ const concatenatedString = strings.reduce(conc_function, init);
 console.log(concatenatedString); 
 ```
 
-
 ## Closures
 
+
+
+## Exercises
+
+## *Side Effects with `forEach`* {-}
+
+```{js, eval=F}
+const vals = [1, 2, 3];
+doubleInPlace(vals);
+console.log(`vals after change: ${vals}`);
+
+
+function doubleInPlace(arr) {
+  arr.forEach( (element, index)  => {
+    arr[index] *= 2;
+  });
+}
+```
+
+## *Annotating Data* {-}
+
+```{js, eval=F}
+const data = [
+  {'date': '1977-7-16', 'sex': 'M', 'species': 'NL'},
+  {'date': '1977-7-16', 'sex': 'M', 'species': 'NL'},
+  {'date': '1977-7-16', 'sex': 'F', 'species': 'DM'},
+  {'date': '1977-7-16', 'sex': 'M', 'species': 'DM'},
+  {'date': '1977-7-16', 'sex': 'M', 'species': 'DM'},
+  {'date': '1977-7-16', 'sex': 'M', 'species': 'PF'},
+  {'date': '1977-7-16', 'sex': 'F', 'species': 'PE'},
+  {'date': '1977-7-16', 'sex': 'M', 'species': 'DM'}
+]
+
+const newData = 
+  data
+    // Create index
+    .map( (obj, index) => {
+      obj.seq = index + 1;
+      return obj;
+    })
+    // Only retain female observations
+    .filter( obj => obj.sex === 'F')
+    // Replace date field with just the year
+    .map( obj => {
+      obj.year = obj.date.split('-')[0];
+      delete obj.date;
+      return obj;
+    });
+
+console.log(newData);
+
+// Why we won't reorder the new object keys:
+// https://stackoverflow.com/questions/6959817/changing-the-order-of-the-object-keys
+```
 
 ## Meeting Videos {-}
 
