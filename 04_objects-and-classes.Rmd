@@ -9,6 +9,299 @@
 - ADD SLIDES AS SECTIONS (`##`).
 - TRY TO KEEP THEM RELATIVELY SLIDE-LIKE; THESE ARE NOTES, NOT THE BOOK ITSELF.
 
+## Exercises
+
+## *Delays* {-}
+
+```{js, eval=FALSE}
+class Delay {
+  constructor(value) {
+    this.value = value;
+  }
+
+  call(newValue) {
+    const temp = this.value;
+    this.value = newValue;
+    return temp;
+  }
+}
+
+const example = new Delay("a");
+['b', 'c', 'd'].forEach(
+  value => console.log(`${value} -> ${example.call(value)}`)
+);
+```
+
+## *Filtering* {-}
+
+```{js, eval=FALSE}
+class Filter {
+  constructor() {
+    this.inputs = [...arguments];
+  }
+
+  call(value) {
+    return this.inputs.includes(value) ?
+      null : value;
+  }
+}
+
+const example = new Filter('a', 'e', 'i', 'o', 'u');
+['a', 'b', 'c', 'd', 'e'].forEach(
+  value => console.log(`${value} -> ${example.call(value)}`)
+);
+```
+
+## *Pipelines* {-}
+
+
+```{js, echo=FALSE}
+class Delay {
+  constructor(value) {
+    this.value = value;
+  }
+
+  call(newValue) {
+    const temp = this.value;
+    this.value = newValue;
+    return temp;
+  }
+}
+
+globalThis.Delay = Delay;
+```
+
+```{js, echo=FALSE}
+class Filter {
+  constructor() {
+    this.inputs = [...arguments];
+  }
+
+  call(value) {
+    return this.inputs.includes(value) ?
+      null : value;
+  }
+}
+
+globalThis.Filter = Filter;
+```
+
+```{js, eval=FALSE}
+class Pipeline {
+  constructor() {
+    this.inputs = [...arguments];
+  }
+  call(value) {
+    const numObjects = this.inputs.length;
+    let callResult;
+    for (let i=0; i< numObjects; i++) {
+      callResult = this.inputs[i].call(value)
+      if (callResult === null) return null;
+    }
+    return callResult;
+  }
+}
+
+const example = new Pipeline(
+  new Filter('a', 'e', 'i', 'o', 'u'),
+  new Delay('a')
+);
+['a' ,'b', 'c', 'd', 'e'].forEach(
+  value => console.log(`${value} -> ${example.call(value)}`)
+);
+```
+
+## *Active Expressions* {-}
+
+### Item 1
+
+```{js, echo=FALSE}
+class Active {
+  constructor (name, transform) {
+    this.name = name;
+    this.transform = transform;
+    this.subscribers = [];
+  }
+
+  subscribe (someone) {
+    this.subscribers.push(someone);
+  }
+
+  update (input) {
+    console.log(`${this.name} got ${input}`);
+    const output = this.transform(input);
+    for (let s of this.subscribers) {
+      s.update(output);
+    }
+  }
+}
+
+globalThis.Active = Active;
+```
+
+```{js, eval=FALSE}
+class Active {
+  constructor (name, transform) {
+    this.name = name;
+    this.transform = transform;
+    this.subscribers = [];
+  }
+
+  subscribe (someone) {
+    this.subscribers.push(someone)
+  }
+
+  update (input) {
+    console.log(`${this.name} got ${input}`);
+    const output = this.transform(input)
+    for (let s of this.subscribers) {
+      s.update(output)
+    }
+  }
+}
+
+const start = new Active('start', (x) => Math.min(x, 10));
+const left = new Active('left', (x) => 2 * x);
+const right = new Active('right', (x) => x + 1);
+const final = new Active('final', (x) => x);
+
+start.subscribe(left);
+start.subscribe(right);
+left.subscribe(final);
+right.subscribe(final);
+
+start.update(123);
+```
+
+- Order of operations performed:
+    1. left.update(Math.min(10, 123))
+    1. final.update(2 * 10)
+    1. right.update(Math.min(10, 123))
+    1. final.update(10 + 1)
+
+### Item 2
+
+```{js, echo=FALSE}
+class Active {
+  constructor (name, transform) {
+    this.name = name;
+    this.subscribers = [];
+
+    // Verify that the second argument for 
+    // the new class instance is a function.
+    if (typeof arguments[1] === 'function') {
+      this.transform = transform;
+    }
+  }
+
+  subscribe (someone) {
+    this.subscribers.push(someone);
+  }
+
+  update (input) {
+    console.log(`${this.name} got ${input}`);
+    const output = this.transform(input);
+    for (let s of this.subscribers) {
+      s.update(output);
+    }
+  }
+  
+  // Fallback transform function
+  transform (input) {
+    return input + 2;
+  }
+}
+
+globalThis.Active = Active;
+```
+
+```{js, eval=FALSE}
+class Active {
+  constructor (name, transform) {
+    this.name = name;
+    this.subscribers = [];
+
+    // Verify that the second argument for 
+    // the new class instance is a function.
+    if (typeof arguments[1] === 'function') {
+      this.transform = transform;
+    }
+  }
+
+  subscribe (someone) {
+    this.subscribers.push(someone);
+  }
+
+  update (input) {
+    console.log(`${this.name} got ${input}`);
+    const output = this.transform(input);
+    for (let s of this.subscribers) {
+      s.update(output);
+    }
+  }
+  
+  // Fallback transform function
+  transform (input) {
+    return input + 2;
+  }
+}
+
+// No transform function provided
+const test = new Active("testing");
+// Default transform method is used
+console.log(test.transform(2));
+```
+
+### Item 3
+
+It's not clear if the proposed `class` to create in this
+item is truly a JavaScript `observer`. 
+
+Therefore, instead, we provide a simple example of a JavaScript
+`observer`, based on [this](https://www.dofactory.com/javascript/design-patterns/observer) one. 
+
+A deeper dive on JavaScript `observables` can be found 
+[here](https://www.stackchief.com/tutorials/JavaScript%20Observables%20in%205%20Minutes).
+
+
+```{js, eval=FALSE}
+class Observable {
+  constructor() {
+    this.observers = [];
+  }
+
+  subscribe(fn) {
+    this.observers.push(fn);
+  }
+
+  unsubscribe(fn) {
+    this.observers = this.observers.filter(
+      item => item !== fn
+    );
+  }
+
+  notify(notification) {
+    this.observers.forEach(
+      // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/call
+      item => item.call(globalThis, notification)
+    );
+  }
+}
+
+const observableInstance = new Observable();
+const observer = (item) => console.log(`Notified: ${item}`);
+
+observableInstance.subscribe(observer);
+observableInstance.notify("Please");
+
+observableInstance.unsubscribe(observer);
+observableInstance.notify("don't");
+
+observableInstance.subscribe(observer);
+observableInstance.notify("clap");
+```
+
+
 ## Meeting Videos {-}
 
 ### Cohort 1 {-}
