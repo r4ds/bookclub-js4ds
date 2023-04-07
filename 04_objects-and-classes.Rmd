@@ -36,8 +36,8 @@ const example = new Delay("a");
 
 ```{js, eval=FALSE}
 class Filter {
-  constructor() {
-    this.inputs = [...arguments];
+  constructor(...args) {
+    this.inputs = args;
   }
 
   call(value) {
@@ -73,8 +73,8 @@ globalThis.Delay = Delay;
 
 ```{js, echo=FALSE}
 class Filter {
-  constructor() {
-    this.inputs = [...arguments];
+  constructor(...args) {
+    this.inputs = args;
   }
 
   call(value) {
@@ -88,8 +88,8 @@ globalThis.Filter = Filter;
 
 ```{js, eval=FALSE}
 class Pipeline {
-  constructor() {
-    this.inputs = [...arguments];
+  constructor(...args) {
+    this.inputs = args;
   }
   call(value) {
     const numObjects = this.inputs.length;
@@ -117,17 +117,17 @@ const example = new Pipeline(
 
 ```{js, echo=FALSE}
 class Active {
-  constructor (name, transform) {
+  constructor(name, transform) {
     this.name = name;
     this.transform = transform;
     this.subscribers = [];
   }
 
-  subscribe (someone) {
+  subscribe(someone) {
     this.subscribers.push(someone);
   }
 
-  update (input) {
+  update(input) {
     console.log(`${this.name} got ${input}`);
     const output = this.transform(input);
     for (let s of this.subscribers) {
@@ -141,17 +141,17 @@ globalThis.Active = Active;
 
 ```{js, eval=FALSE}
 class Active {
-  constructor (name, transform) {
+  constructor(name, transform) {
     this.name = name;
     this.transform = transform;
     this.subscribers = [];
   }
 
-  subscribe (someone) {
+  subscribe(someone) {
     this.subscribers.push(someone)
   }
 
-  update (input) {
+  update(input) {
     console.log(`${this.name} got ${input}`);
     const output = this.transform(input)
     for (let s of this.subscribers) {
@@ -183,7 +183,7 @@ start.update(123);
 
 ```{js, echo=FALSE}
 class Active {
-  constructor (name, transform) {
+  constructor(name, transform) {
     this.name = name;
     this.subscribers = [];
 
@@ -194,11 +194,11 @@ class Active {
     }
   }
 
-  subscribe (someone) {
+  subscribe(someone) {
     this.subscribers.push(someone);
   }
 
-  update (input) {
+  update(input) {
     console.log(`${this.name} got ${input}`);
     const output = this.transform(input);
     for (let s of this.subscribers) {
@@ -207,7 +207,7 @@ class Active {
   }
   
   // Fallback transform function
-  transform (input) {
+  transform(input) {
     return input + 2;
   }
 }
@@ -217,7 +217,7 @@ globalThis.Active = Active;
 
 ```{js, eval=FALSE}
 class Active {
-  constructor (name, transform) {
+  constructor(name, transform) {
     this.name = name;
     this.subscribers = [];
 
@@ -228,11 +228,11 @@ class Active {
     }
   }
 
-  subscribe (someone) {
+  subscribe(someone) {
     this.subscribers.push(someone);
   }
 
-  update (input) {
+  update(input) {
     console.log(`${this.name} got ${input}`);
     const output = this.transform(input);
     for (let s of this.subscribers) {
@@ -241,7 +241,7 @@ class Active {
   }
   
   // Fallback transform function
-  transform (input) {
+  transform(input) {
     return input + 2;
   }
 }
