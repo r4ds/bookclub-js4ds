@@ -2,12 +2,272 @@
 
 **Learning objectives:**
 
-- THESE ARE NICE TO HAVE BUT NOT ABSOLUTELY NECESSARY
+- Use some of the HTML tools from the previous
+chapter in order to modify a website's content.
 
-## SLIDE 1 {-}
+## Summary
 
-- ADD SLIDES AS SECTIONS (`##`).
-- TRY TO KEEP THEM RELATIVELY SLIDE-LIKE; THESE ARE NOTES, NOT THE BOOK ITSELF.
+- This chapter is very self explanatory (it's just examples),
+  therefore, only some useful complementations will be provided:
+    - `childNodes` vs `children`:
+        <https://www.w3schools.com/jsref/prop_node_childnodes.asp#:~:text=childNodes%20vs%20children,not%20text%20and%20comment%20nodes).>
+
+    - Does the `load` event occur before `DOMContentLoaded`?
+      <https://stackoverflow.com/questions/69503436/why-load-event-comes-before-domcontentloaded>
+
+    - Other ways to remove children from a parent, in HTML:
+      <https://stackoverflow.com/questions/3955229/remove-all-child-elements-of-a-dom-node-in-javascript>
+
+- There seems to be an [issue](https://github.com/software-tools-books/js4ds/issues/228)
+with one of the chapter's examples.
+
+## Exercises
+
+## *What Encoding Is This?* {-}
+
+1. 
+    - Some possible `charset` [values](https://www.w3schools.com/charsets/).
+    - JavaScript code:
+
+    ```js
+    function getCharacterEncoding() {
+      return document.characterSet;
+    }
+    ```
+
+2. JavaScript code:
+
+```js
+function getMetaValues() {
+  const metaElements = document.querySelectorAll("meta");
+  metaElements.forEach(meta => {
+    const attributes = meta.getAttributeNames();
+    
+    const metadata = {};
+    attributes.forEach(
+      attr => metadata[attr] = meta.getAttribute(attr)
+    );
+
+    // Print attributes' name and value of meta element
+    console.log(metadata);
+  });
+}
+```
+
+## *Word Count* {-}
+
+1. Count the *number of words* in the page:
+    - Useful suggestions:
+        - [No *fancy* functions used](https://stackoverflow.com/questions/10730309/find-all-text-nodes-in-html-page/10730777#10730777).
+        - [*Fancy* ish solution](https://stackoverflow.com/a/44516001).
+    
+    - Proposed solutions:
+        - `countWords()`
+
+        ```js
+        function textNodesUnder(parent) {
+          let filteredNodes = [];
+
+          for (parent = parent.firstChild; parent; parent = parent.nextSibling) {
+            // Ignore style and script elements
+            if (['STYLE', 'SCRIPT'].includes(parent.tagName)) continue;
+            
+            if (parent.nodeType === Node.TEXT_NODE) {
+              filteredNodes.push(parent);
+            } else {
+              filteredNodes = filteredNodes.concat(textNodesUnder(parent));
+            }
+          }
+          return filteredNodes;
+        }
+
+        function countWords(parentElement = document.body) {
+          return textNodesUnder(parentElement)
+            // Get text content of text node
+            .map(node => node.textContent)
+            // Detect text without words
+            .map(text => 
+              text
+                // Remove every break line 
+                .replaceAll(/\n/g, " ")
+                // Convert every positive number
+                // of white spaces into only one
+                .replaceAll(/\s+/g, " ")
+            )
+            // Remove texts without words
+            .filter(text => text !== ' ')
+            // Split every text by word
+            .map(text => text.split(" "))
+            // Remove possibly created '' items
+            // in subarrays, due to strings like 
+            // "word " to have been splitted
+            .map(subArray => subArray.filter(text => text !== ''))
+            // Retrieve every item (word) into a 1D array
+            .flat()
+            // Get number of words
+            .length
+        }
+        ```
+
+        - More elegant solution, but prone to wrong word count
+        for untested weird cases:
+
+        ```js
+        document.documentElement.innerText
+          // Remove break lines
+          .replaceAll(/\n/g, " ")
+          // Trim every white space to one only
+          .replaceAll(/\s+/g, " ")
+          // Separate words
+          .split(" ")
+          .length
+        ```
+
+1. `showWords()`
+    - HTML `body` example
+
+    ```html
+    <style>
+      p {
+        color: lightcoral;
+      }
+    </style>
+
+    <p id="wordcount">some random text</p>
+
+    <ul>
+      <li>1</li>
+      <li>2</li>
+    </ul>
+
+    <img src="" alt="this is an error message">
+
+    <div>
+      <p contenteditable="true">lorem <strong>...</strong> ipsum</p>
+    </div>
+    ```
+
+    - Proposed solution
+
+    ```js
+    // Same code as in the previous item
+
+    function showWords() {
+      document.querySelector("#wordcount").innerText = countWords();
+    }
+    ```
+
+## *A More Robust Table of Contents* {-}
+
+1. When the `h2` element has no `id` attribute,
+the example JavaScript code generates the same respective 
+`a` element, except for its `href` attribute value: `#`.
+Therefore, such `h2` elements produce an `a` element that 
+*links* to the same page, not to the intended page section.
+
+2. Proposed solution
+
+  ```js
+  const container = document.getElementById('fill');
+  
+  // Only this next line of code needs to be changed
+  const headings = Array.from(document.querySelectorAll('h2[id]'));
+
+  const items = headings
+    .map((h) => `<li><a href="#${h.id}">${h.innerHTML}</a></li>`)
+    .join('');
+    
+  container.innerHTML = '<ul>' + items + '</ul>';
+  ```
+
+## *Explicitly Creating Nodes* {-}
+
+- Why should we [avoid](https://betterprogramming.pub/dom-manipulation-the-dangers-of-innerhtml-602f4119d905) 
+using `innerHTML`?
+
+- Mozilla documentation for 
+[`document.createElement`](https://developer.mozilla.org/en-US/docs/Web/API/Document/createElement) and 
+[`document.createTextNode`](https://developer.mozilla.org/en-US/docs/Web/API/Document/createTextNode).
+
+- Proposed solution:
+    - HTML's `body` code:
+
+    ```html
+        <h1>Title</h1>
+    <div id="fill"></div>
+    <h2 id="one">
+      First 
+      <em>
+        empha
+        <!-- uwu -->
+        <span style="text-decoration: overline;">size</span>
+      </em>
+      d
+    </h2>
+    <p>stuff</p>
+    <h2>Second <code>with code</code></h2>
+    <h3>stuff</h3>
+    <h2 id="three">Third</h2>
+    <p>stuff</p>
+    ```
+
+    - JavaScript code
+
+    ```js
+    const headings = Array.from(document.querySelectorAll('h2[id]'));
+
+    const container = document.getElementById('fill');
+    const toc = document.createElement("ul");
+    container.appendChild(toc);
+
+    headings.forEach(h => {
+      const listItem = document.createElement("li");
+      
+      const listItemAnchor = document.createElement("a");
+      listItemAnchor.setAttribute("href", '#' + h.id);
+      
+      /*
+        Solution 1: Do not preserve header's html
+          Only retrieve the text from the header,
+          and copy it into its respective anchor
+      */
+      `
+      listItemAnchor.appendChild(
+        document.createTextNode(h.textContent)
+        );
+      `
+
+      /*
+        Solution 2: Preserve header's html
+        Clone the child nodes of the header
+        and include them in its respective anchor
+      */
+        h.childNodes.forEach(childNode => {
+          // Clone each child node, in order not
+          // to affect the header when appending
+          // them to a different html element
+
+          // Clone node, including its descendants
+          const nodeClone = childNode.cloneNode(true);
+
+          // If the child node is an HTML element,
+          // then, preserve its attribute values
+          if (childNode.nodeType === Node.ELEMENT_NODE) {
+            childNode.getAttributeNames().forEach(attr =>
+              nodeClone.setAttribute(
+                attr, childNode.getAttribute(attr)
+              )
+            );
+          }
+
+          // Append cloned node into header's anchor
+          listItemAnchor.appendChild(nodeClone);
+        });
+
+      listItem.appendChild(listItemAnchor);
+      toc.appendChild(listItem);
+    });
+    ```
 
 ## Meeting Videos {-}
 
