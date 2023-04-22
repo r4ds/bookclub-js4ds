@@ -589,12 +589,17 @@ for example `col-sm-4`, goes in line with the use of
 
 ### Cohort 1 {-}
 
-`r knitr::include_url("https://www.youtube.com/embed/URL")`
+`r knitr::include_url("https://www.youtube.com/embed/N9aEMSjCzBk")`
 
 <details>
 <summary> Meeting chat log </summary>
 
 ```
-LOG
+00:28:34	Lucio Cornejo:	https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#examples
+00:33:26	Lucio Cornejo:	https://d3js.org/
+00:55:57	James Arthur Shaw:	Here's also the URL of a non-minified version: https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.css
+00:59:29	Lucio Cornejo:	https://www.w3schools.com/html/html_responsive.asp
+01:06:22	Lucio Cornejo:	shiny UI
+01:06:41	Lucio Cornejo:	outstanding user interfaces for shiny bookclub r4ds
 ```
 </details>

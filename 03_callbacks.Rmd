@@ -466,13 +466,25 @@ console.log(newData);
 
 ### Cohort 1 {-}
 
-`r knitr::include_url("https://www.youtube.com/embed/URL")`
+`r knitr::include_url("https://www.youtube.com/embed/DE17UUTBIqA")`
 
 <details>
 <summary> Meeting chat log </summary>
 
 ```
-LOG
+00:01:55	Lucio Cornejo: Hello Arthur
+00:02:35	Arthur: 👋, Lucio
+00:06:11	Lucio Cornejo: https://github.com/r4ds/bookclub-js4ds/pull/7/files
+00:06:25	Lucio Cornejo: that's the file for today's notes
+00:10:03	Arthur: fat arrow
+00:22:46	Lucio Cornejo: https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Asynchronous/Introducing
+00:32:12	Lucio Cornejo: Hello Peter
+00:40:02	Lucio Cornejo: https://stackoverflow.com/questions/38345372/why-is-length-2
+00:41:06	Arthur: Luckily, purrr has the same functions. Nice that lots of my mental model of R will transfer somewhat to JS. Functions: https://purrr.tidyverse.org/reference/every.html
+00:44:59	Lucio Cornejo: Reacted to "Luckily, purrr has th..." with 🎉
+01:01:39	Arthur: Here's another nice, compact treatment of callback functions: https://www.w3schools.com/js/js_callback.asp
+01:03:49	Arthur: Here's function factories in R: https://adv-r.hadley.nz/function-factories.html
+01:09:29	Lucio Cornejo: https://eloquentjavascript.net/
 ```
 </details>
 

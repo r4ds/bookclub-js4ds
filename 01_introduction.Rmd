@@ -122,12 +122,27 @@ s;
 
 ### Cohort 1 {-}
 
-`r knitr::include_url("https://www.youtube.com/embed/URL")`
+`r knitr::include_url("https://www.youtube.com/embed/Qrj0Ez6qduQ")`
 
 <details>
 <summary> Meeting chat log </summary>
 
 ```
-LOG
+00:15:16	Lucio Cornejo: https://r4ds.github.io/bookclub-js4ds/how-to-present.html
+00:15:34	Shel: https://third-bit.com/js4ds/#key-points-1
+00:24:56	Shel: Greg Wilson was the main facilitator of the RSTUDIO Certification training. 
+00:27:30	Lucio Cornejo: https://nodejs.org/en/download/
+00:32:50	Shel: Please feel free to post your questions here. 
+00:41:05	Lucio Cornejo: https://code.visualstudio.com/download
+00:41:28	Lucio Cornejo: https://marketplace.visualstudio.com/items?itemName=WallabyJs.quokka-vscode
+00:43:29	Laurent Smeets: can you show us how to open a new script in visual studio code
+00:43:33	Shel: How do you install quokka in VS? 
+00:43:45	Laurent Smeets: and then how to launch quokka
+00:43:47	Arthur Shaw: @shel, yes. It's an extension to VSCode
+00:43:54	Laurent Smeets: https://marketplace.visualstudio.com/items?itemName=WallabyJs.quokka-vscode
+00:44:17	Laurent Smeets: yes pleas
+00:46:07	Shel: Please repeat. You are fast
+01:01:21	Laurent Smeets: so no need to knit the chapters before committing?
+01:07:59	Laurent Smeets: thanks everyone
 ```
 </details>

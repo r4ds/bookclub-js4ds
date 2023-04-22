@@ -440,12 +440,24 @@ after a `return` statement, in the *same scope*.
 
 ### Cohort 1 {-}
 
-`r knitr::include_url("https://www.youtube.com/embed/URL")`
+`r knitr::include_url("https://www.youtube.com/embed/rsSy0s04_ZI")`
 
 <details>
 <summary> Meeting chat log </summary>
 
 ```
-LOG
+00:01:59	Oluwafemi Oyedele: Hello Everyone!!!
+00:02:21	Lucio Cornejo: Helloo
+00:02:30	Lucio Cornejo: Let's wait two more minutes
+00:03:43	Shel: Okay
+00:03:56	Shel: Hi Oluwafemi
+00:04:42	Lucio Cornejo: https://r4ds.github.io/bookclub-js4ds/basic-features.html
+00:10:36	Lucio Cornejo: `
+00:16:11	Shel: Nope
+00:23:11	Shel: The pace is too fast for me ... 😢
+00:23:34	Shel: But I'll go through the notes later. I'm lagging behind
+00:24:16	Shel: Hahahaha ... funny joke!
+00:51:05	Shel: I have to drop Lucio ... thank you so much.
+01:01:32	Lucio Cornejo: https://eloquentjavascript.net/
 ```
 </details>
