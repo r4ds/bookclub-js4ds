@@ -273,12 +273,15 @@ using `innerHTML`?
 
 ### Cohort 1 {-}
 
-`r knitr::include_url("https://www.youtube.com/embed/URL")`
+`r knitr::include_url("https://www.youtube.com/embed/lhZbmimIEhQ")`
 
 <details>
 <summary> Meeting chat log </summary>
 
 ```
-LOG
+00:17:38	Lucio Cornejo:	https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode
+00:26:06	Lucio Cornejo:	https://stackoverflow.com/questions/3955229/remove-all-child-elements-of-a-dom-node-in-javascript
+00:40:59	Lucio Cornejo:	https://developer.mozilla.org/en-US/docs/Web/API/Document/readystatechange_event
+01:00:51	Lucio Cornejo:	https://betterprogramming.pub/dom-manipulation-the-dangers-of-innerhtml-602f4119d905
 ```
 </details>

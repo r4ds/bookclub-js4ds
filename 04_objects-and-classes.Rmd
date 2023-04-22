@@ -9,7 +9,7 @@
 - ADD SLIDES AS SECTIONS (`##`).
 - TRY TO KEEP THEM RELATIVELY SLIDE-LIKE; THESE ARE NOTES, NOT THE BOOK ITSELF.
 
-## Exercises
+## Exercises {-}
 
 ## *Delays* {-}
 
@@ -306,12 +306,63 @@ observableInstance.notify("clap");
 
 ### Cohort 1 {-}
 
-`r knitr::include_url("https://www.youtube.com/embed/URL")`
+`r knitr::include_url("https://www.youtube.com/embed/3-BBhol04hQ")`
 
 <details>
 <summary> Meeting chat log </summary>
 
 ```
-LOG
+00:20:44	Shel:	I'm so sorry I forgot that the timing of this meeting was pushed one hour back coz of the daylight thing.
+00:20:52	Lucio Cornejo:	hello Shel
+00:21:13	Shel:	Reacted to "hello Shel" with ❤️
+00:22:54	Shel:	Hi Lucio
+00:23:23	Lucio Cornejo:	Reacted to "Hi Lucio" with 🥲
+00:26:03	Lucio Cornejo:	https://stackoverflow.com/questions/9772307/declaring-javascript-object-method-in-constructor-function-vs-in-prototype#:~:text=When%20you%20declare%20methods%20in,be%20gc'd%20as%20long
+00:44:22	Lucio Cornejo:	https://stackoverflow.com/questions/38796519/bind-classes-to-global-scope-in-es6
+00:46:09	Shel:	Thanks Arthur. I'll watch the video later
+00:51:06	Lucio Cornejo:	class Delay {
+  constructor(value) {
+    this.value = value;
+  }
+
+  call(newValue) {
+    const temp = this.value;
+    this.value = newValue;
+    return temp;
+  }
+}
+00:54:37	Lucio Cornejo:	class Filter {
+  constructor() {
+    this.inputs = [...arguments];
+  }
+
+  call(value) {
+    return this.inputs.includes(value) ?
+      null : value;
+  }
+}
+01:02:20	Lucio Cornejo:	// Pipelines
+class Pipeline {
+  constructor() {
+    this.inputs = [...arguments];
+  }
+  call(value) {
+    const numObjects = this.inputs.length;
+    let callResult;
+    for (let i=0; i< numObjects; i++) {
+      callResult = this.inputs[i].call(value)
+      if (callResult === null) return null;
+    }
+    return callResult;
+  }
+}
+
+const example = new Pipeline(
+  new Filter('a', 'e', 'i', 'o', 'u'),
+  new Delay('a')
+);
+['a' ,'b', 'c', 'd', 'e'].forEach(
+  value => console.log(value, '->', example.call(value))
+);
 ```
 </details>
