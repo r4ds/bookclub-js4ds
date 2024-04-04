@@ -237,7 +237,7 @@ const greet = function (platform) {
 		console.log("Welcome to ", platform);
 };
 	
-greet("R4DS");
+greet("DSLC");
 
 ```
 

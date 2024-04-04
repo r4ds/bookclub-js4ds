@@ -1,15 +1,15 @@
-# R4DS JavaScript for Data Science Book Club
+# DSLC JavaScript for Data Science Book Club
 
-Welcome to the R4DS JavaScript for Data Science Book Club!
+Welcome to the DSLC JavaScript for Data Science Book Club!
 
 We are working together to read [_JavaScript for Data Science_](https://third-bit.com/js4ds/) by Maya Gans, Toby Hodges, and Greg Wilson (copyright January 2020).
-If you would like a print version, please consider purchasing it using our [Amazon Affiliates link](https://amzn.to/3JVKG5k). All profits from purchases through that link go toward maintaining the R4DS Online Learning Community.
-Join the [#book_club-js4ds](https://rfordatascience.slack.com/archives/C04KVRXB1JR) channel on the [R4DS Slack](https://r4ds.io/join) to participate.
-As we read, we are producing [notes about the book](https://r4ds.io/js4ds).
+If you would like a print version, please consider purchasing it using our [Amazon Affiliates link](https://amzn.to/3JVKG5k). All profits from purchases through that link go toward maintaining the Data Science Learning Community.
+Join the [#book_club-js4ds](https://dslcio.slack.com/archives/C04KVRXB1JR) channel on the [DSLC Slack](https://dslc.io/join) to participate.
+As we read, we are producing [notes about the book](https://dslc.io/js4ds).
 
 ## Meeting Schedule
 
-If you would like to present, please see the sign-up sheet for your cohort (linked below, and pinned in the [#book_club-js4ds](https://rfordatascience.slack.com/archives/C04KVRXB1JR) channel on Slack)!
+If you would like to present, please see the sign-up sheet for your cohort (linked below, and pinned in the [#book_club-js4ds](https://dslcio.slack.com/archives/C04KVRXB1JR) channel on Slack)!
 
 - Cohort 1 (started 2023-02-23, ended 2023-04-13): [meeting videos](https://youtube.com/playlist?list=PL3x6DOfs2NGgwAfePIgOi6RqLABm2Rjkk)
 
@@ -40,7 +40,7 @@ Do these steps each time you present another chapter:
 10. When your PR has been accepted ("merged"), `usethis::pr_finish()` to close out your branch and prepare your local repository for future work.
 11. Now that your local copy is up-to-date with the main repo, you need to update your remote fork. Run `gert::git_push("origin")` or click the `Push` button on the `Git` tab of Rstudio.
 
-When your PR is checked into the main branch, the bookdown site will rebuild, adding your slides to [this site](https://r4ds.io/js4ds).
+When your PR is checked into the main branch, the bookdown site will rebuild, adding your slides to [this site](https://dslc.io/js4ds).
 
 
 ## Code of Conduct
